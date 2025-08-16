@@ -12,6 +12,11 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Logged in as {bot.user.name}')
 
+@bot.event
+async def on_message(message):
+    if "https://" in message.content:
+        await message.author.ban(reason="Posted links 3 times")
+
 @bot.command()
 async def start(ctx):
     await ctx.send("Hi! I'm a chat manager bot!")
